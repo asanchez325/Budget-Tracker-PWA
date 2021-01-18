@@ -12,7 +12,6 @@ request.onsuccess = function(event) {
     db = event.target.result;
     if (navigator.onLine) {
         uploadTransaction();
-
     }
   }
   
@@ -33,20 +32,20 @@ function saveRecord(record) {
     transactionObjectStore.add(record);
   };
 
-  function uploadPizza() {
+  function uploadTransaction() {
     // open a transaction on your pending db
-    const transaction = db.transaction(['new_pizza'], 'readwrite');
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
   
     // access your pending object store
-    const pizzaObjectStore = transaction.objectStore('new_pizza');
+    const transactionObjectStore = transaction.objectStore('new_transaction');
   
     // get all records from store and set to a variable
-    const getAll = pizzaObjectStore.getAll();
+    const getAll = transactionObjectStore.getAll();
   
     getAll.onsuccess = function() {
       // if there was data in indexedDb's store, let's send it to the api server
       if (getAll.result.length > 0) {
-        fetch('/api/pizzas', {
+        fetch('/routes/api', {
           method: 'POST',
           body: JSON.stringify(getAll.result),
           headers: {
@@ -61,7 +60,7 @@ function saveRecord(record) {
             }
   
             const transaction = db.transaction(['new_transaction'], 'readwrite');
-            const transactionObjectStore = transaction.objectStore('new_pizza');
+            const transactionObjectStore = transaction.objectStore('new_transaction');
             // clear all items in your store
             transactionObjectStore.clear();
           })
