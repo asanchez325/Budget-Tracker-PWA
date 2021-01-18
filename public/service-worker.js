@@ -2,15 +2,15 @@ self.addEventListener('install', function (e) {
 
 })
 
-const APP_PREFIX = 'budget-tracker';     
+const APP_PREFIX = 'BudgetTracker-';     
 const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION;
 
 const FILES_TO_CACHE = [
     "./index.html",
-    "./public/css/style.css",
-    "./public/js/idb.js",
-    "./public/js/index.js",
+    "./css/style.css",
+    "./js/idb.js",
+    "./js/index.js",
 ];
 
 self.addEventListener('install', function (e) {
